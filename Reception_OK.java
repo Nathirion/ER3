@@ -18,25 +18,23 @@ import com.digi.xbee.api.models.XBeeMessage;
  */
 public class JavaApplication2 {
 
-    private static final String PORT = "/dev/ttyUSB0";
+    private static final String PORT = "/dev/ttyUSB0"; // On choisit le port, celui où la carte Xbee est connectée.
 
-    private static final int BAUD_RATE = 9600;
+    private static final int BAUD_RATE = 9600; // On définit la rapidité de modulation, à savoir ici 9600 ( 9600 bit/s).
 
-    private static final String DATA_RECEIVE = "";
+    private static final String DATA_RECEIVE = ""; // On définit une variable de type String afin d'y stocker la valeur brute reçue.
     
-    public static final String recu="";
+    public static final String recu=""; // On définit une variable de type String afin d'y stocker la valeur finale voulue.
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
 
-        XBeeDevice myDevice = new XBeeDevice(PORT, BAUD_RATE);
+        XBeeDevice myDevice = new XBeeDevice(PORT, BAUD_RATE); // On définit le nouvel objet Xbee
         byte[] dataToReceive = DATA_RECEIVE.getBytes();
 
         try {
 
-            myDevice.open();
+            myDevice.open(); // On "ouvre" la communication
 
             if (myDevice.getXBeeProtocol() == XBeeProtocol.XBEE_WIFI) {
                 myDevice.close();
@@ -47,7 +45,7 @@ public class JavaApplication2 {
             } else {
                 for(int i = 0; i<20; i++){
                     XBeeMessage recu =  myDevice.readData();    
-                    System.out.println("Le message recu est le suivant : "+recu);
+                    System.out.println("Le message recu est le suivant : "+recu); // Ici on affiche le message, la valeur reçue. 
                 }
                
             }
@@ -60,7 +58,7 @@ public class JavaApplication2 {
             System.exit(1);
 
         } finally {
-            myDevice.close();
+            myDevice.close(); 
         }
 
         // TODO code application logic here
